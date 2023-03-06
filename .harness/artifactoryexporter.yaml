@@ -1,0 +1,38 @@
+pipeline:
+  name: artifactory-exporter
+  identifier: artifactoryexporter
+  projectIdentifier: infactengops
+  orgIdentifier: infactorg
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: artifactoryexporter
+        build: <+input>
+  stages:
+    - stage:
+        name: Artifactory-CI
+        identifier: ArtifactoryCI
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: artctdocker
+                    image: harness:latest
+                    shell: Sh
+                    command: echo "hi"
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: spin2preprodharnessocp
+              namespace: harness-delegate
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
