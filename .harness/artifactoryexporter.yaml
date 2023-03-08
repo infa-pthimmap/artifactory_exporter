@@ -78,11 +78,15 @@ pipeline:
                       - helm/dockerImagePullSecret.yaml
                       - helm/service.yaml
                       - helm/servicemonitor.yaml
+                      - helm/secret.yaml
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
                     overrides: []
+                    delegateSelectors:
+                      - ichsnp-useast1-kube-controlplane-delegate
                   timeout: 10m
+                  failureStrategies: []
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
