@@ -15,7 +15,7 @@ spec:
         app.kubernetes.io/name: artifactory-exporter
     spec:
       imagePullSecrets:
-        - name: {{ .Values.image.imagePullSecretName }}
+        - name: docker-registry-image-pull-secret
       securityContext:
         runAsUser: 1001
         fsGroup: 1001
