@@ -20,14 +20,20 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
+                  type: BuildAndPushDockerRegistry
+                  name: Build Artifactory Exporter Image
+                  identifier: Build_Artifactory_Exporter_Image
                   spec:
                     connectorRef: artctdocker
-                    image: harness:latest
-                    shell: Sh
-                    command: echo "hi"
+                    repo: infacloud-ct-docker-dev.jfrog.io/orion/orion-scheduler
+                    tags:
+                      - latest
+                    dockerfile: Dockerfile
+                    context: /harness
+                    resources:
+                      limits:
+                        memory: 2Gi
+                        cpu: "2"
           infrastructure:
             type: KubernetesDirect
             spec:
@@ -48,6 +54,8 @@ pipeline:
           environment:
             environmentRef: qa_staging
             deployToAll: false
+            infrastructureDefinitions:
+              - identifier: testopa
           execution:
             steps:
               - step:
@@ -58,6 +66,11 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
+              - step:
+                  type: K8sApply
+                  name: Apply_1
+                  identifier: Apply_1
+                  spec: {}
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
@@ -73,3 +86,7 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        variables: []
+        when:
+          pipelineStatus: Success
+          condition: "false"
