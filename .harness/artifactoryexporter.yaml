@@ -68,6 +68,9 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
+                    delegateSelectors:
+                      - ichsnp-useast1-kube-controlplane-delegate
+                  failureStrategies: []
               - step:
                   type: K8sApply
                   name: Apply K8s Manifests
@@ -82,7 +85,17 @@ pipeline:
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
-                    overrides: []
+                    overrides:
+                      - manifest:
+                          identifier: Override
+                          type: Values
+                          spec:
+                            store:
+                              type: Inline
+                              spec:
+                                content: |-
+                                  arti_uri:<+pipeline.stages.Artifactory-CD.variables.ARTI_SCRAPE_URI>
+                                  arti_access_token:<+pipeline.stages.Artifactory-CD.variables.ARTI_ACCESS_TOKEN>
                     delegateSelectors:
                       - ichsnp-useast1-kube-controlplane-delegate
                   timeout: 10m
