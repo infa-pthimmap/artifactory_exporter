@@ -68,8 +68,6 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
-                    delegateSelectors:
-                      - ichsnp-useast1-kube-controlplane-delegate
                   failureStrategies: []
               - step:
                   type: K8sApply
