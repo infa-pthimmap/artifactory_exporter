@@ -24,8 +24,8 @@ pipeline:
                   name: Build Artifactory Exporter Image
                   identifier: Build_Artifactory_Exporter_Image
                   spec:
-                    connectorRef: artctdocker
-                    repo: infacloud-ct-docker-dev.jfrog.io/artifactory-exporter
+                    connectorRef: artifactoryctdocker
+                    repo: ct-docker.artifacts.cloudtrust.rocks/artifactory-exporter
                     tags:
                       - latest
                     dockerfile: Dockerfile
