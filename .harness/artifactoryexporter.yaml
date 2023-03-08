@@ -72,7 +72,17 @@ pipeline:
                   type: K8sApply
                   name: Apply_1
                   identifier: Apply_1
-                  spec: {}
+                  spec:
+                    filePaths:
+                      - helm/deployment.yaml
+                      - helm/dockerImagePullSecret.yaml
+                      - helm/service.yaml
+                      - helm/servicemonitor.yaml
+                    skipDryRun: false
+                    skipSteadyStateCheck: false
+                    skipRendering: false
+                    overrides: []
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
