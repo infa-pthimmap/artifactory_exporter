@@ -92,4 +92,3 @@ pipeline:
         variables: []
         when:
           pipelineStatus: Success
-          condition: "false"
