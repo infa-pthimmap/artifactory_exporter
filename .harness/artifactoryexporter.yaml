@@ -96,8 +96,6 @@ pipeline:
                                 content: |-
                                   arti_uri:<+pipeline.stages.Artifactory-CD.variables.ARTI_SCRAPE_URI>
                                   arti_access_token:<+pipeline.stages.Artifactory-CD.variables.ARTI_ACCESS_TOKEN>
-                    delegateSelectors:
-                      - ichsnp-useast1-kube-controlplane-delegate
                   timeout: 10m
                   failureStrategies: []
             rollbackSteps:
