@@ -25,7 +25,7 @@ pipeline:
                   identifier: Build_Artifactory_Exporter_Image
                   spec:
                     connectorRef: artctdocker
-                    repo: infacloud-ct-docker-dev.jfrog.io/orion/orion-scheduler
+                    repo: infacloud-ct-docker-dev.jfrog.io/artifactory-exporter
                     tags:
                       - latest
                     dockerfile: Dockerfile
