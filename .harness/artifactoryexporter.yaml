@@ -54,10 +54,10 @@ pipeline:
           service:
             serviceRef: artifactory
           environment:
-            environmentRef: qa_staging
+            environmentRef: qa_c
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: testopa
+              - identifier: artifactoryinfa
           execution:
             steps:
               - step:
