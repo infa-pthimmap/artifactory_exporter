@@ -13,7 +13,6 @@ pipeline:
     - stage:
         name: Artifactory-CI
         identifier: ArtifactoryCI
-        description: ""
         type: CI
         spec:
           cloneCodebase: true
@@ -25,7 +24,7 @@ pipeline:
                   identifier: Build_Artifactory_Exporter_Image
                   spec:
                     connectorRef: artctdockerdev
-                    repo: infacloud-ct-docker-dev.jfrog.io//artifactory-exporter
+                    repo: infacloud-ct-docker-dev.jfrog.io/artifactory-exporter
                     tags:
                       - latest
                     dockerfile: Dockerfile
