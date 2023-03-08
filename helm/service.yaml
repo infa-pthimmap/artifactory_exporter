@@ -1,1 +1,14 @@
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: artifactory-exporter-svc
+  labels:
+    app.kubernetes.io/name: artifactory-exporter
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9531
+      targetPort: 9531
+      name: http-1
+  selector:
+    app.kubernetes.io/name: artifactory-exporter
