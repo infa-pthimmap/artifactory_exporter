@@ -70,7 +70,7 @@ pipeline:
                     pruningEnabled: false
               - step:
                   type: K8sApply
-                  name: Apply_1
+                  name: Apply K8s Manifests
                   identifier: Apply_1
                   spec:
                     filePaths:
