@@ -38,7 +38,7 @@ pipeline:
             type: KubernetesDirect
             spec:
               connectorRef: spin2preprodharnessocp
-              namespace: harness-delegate
+              namespace: harness-ocp-delegate
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
