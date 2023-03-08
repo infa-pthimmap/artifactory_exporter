@@ -1,1 +1,52 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artifactory-exporter
+  labels:
+    app.kubernetes.io/name: artifactory-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: artifactory-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: artifactory-exporter
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.image.imagePullSecretName }}
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      containers:
+        - name: artifactory-exporter
+          image: "infacloud-ct-docker-dev.jfrog.io/artifactory-exporter"
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+            runAsGroup: 1001
+            runAsUser: 1001
+            runAsNonRoot: true
+          env:
+            - name: ARTI_SCRAPE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: artifactory-exporter
+                  key: arti_uri
+            - name: ARTI_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: artifactory-exporter
+                  key: arti_access_token
+          ports:
+            - name: http-4
+              containerPort: 9531
+              protocol: TCP
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: 700m
+            requests:
+              memory: 1Gi
+              cpu: 350m
