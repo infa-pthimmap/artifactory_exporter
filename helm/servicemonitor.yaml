@@ -1,15 +1,15 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name:  artifactory-operator-sm
+  name:  artifactory-exporter-sm
   labels:
     release: monitoringaddon
-    app.kubernetes.io/name: artifactory-operator
+    app.kubernetes.io/name: artifactory-exporter
 spec:
   jobLabel: app
   selector:
     matchLabels:
-      app.kubernetes.io/name: artifactory-operator
+      app.kubernetes.io/name: artifactory-exporter
   endpoints:
   - targetPort: 9531
     path: /metrics
