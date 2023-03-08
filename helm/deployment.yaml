@@ -40,7 +40,7 @@ spec:
                   name: artifactory-exporter
                   key: arti_access_token
           ports:
-            - name: http-4
+            - name: http-1
               containerPort: 9531
               protocol: TCP
           resources:
